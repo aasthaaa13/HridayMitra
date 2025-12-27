@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 interface User {
   id: string;
@@ -23,112 +25,108 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const mapSupabaseUser = async (supabaseUser: SupabaseUser | null): Promise<User | null> => {
+    if (!supabaseUser) return null;
+
+    // Fetch profile data
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('full_name, avatar_url')
+      .eq('user_id', supabaseUser.id)
+      .maybeSingle();
+
+    return {
+      id: supabaseUser.id,
+      name: profile?.full_name || supabaseUser.user_metadata?.full_name || supabaseUser.email?.split('@')[0] || 'User',
+      email: supabaseUser.email || '',
+      avatar: profile?.avatar_url || undefined,
+    };
+  };
+
   useEffect(() => {
-    // Check for stored user on mount
-    const storedUser = localStorage.getItem('hridaymitra_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    // Get initial session
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const mappedUser = await mapSupabaseUser(session?.user ?? null);
+      setUser(mappedUser);
+      setIsLoading(false);
+    };
+
+    getSession();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      const mappedUser = await mapSupabaseUser(session?.user ?? null);
+      setUser(mappedUser);
+      setIsLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const storedUsers = JSON.parse(localStorage.getItem('hridaymitra_users') || '[]');
-    const existingUser = storedUsers.find((u: any) => u.email === email);
-    
-    if (!existingUser) {
-      throw new Error('User not found. Please sign up first.');
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setIsLoading(false);
+      throw new Error(error.message);
     }
-    
-    if (existingUser.password !== password) {
-      throw new Error('Invalid password.');
-    }
-    
-    const userData: User = {
-      id: existingUser.id,
-      name: existingUser.name,
-      email: existingUser.email,
-      avatar: existingUser.avatar,
-    };
-    
-    setUser(userData);
-    localStorage.setItem('hridaymitra_user', JSON.stringify(userData));
-    setIsLoading(false);
   };
 
   const signup = async (name: string, email: string, password: string) => {
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const storedUsers = JSON.parse(localStorage.getItem('hridaymitra_users') || '[]');
-    const existingUser = storedUsers.find((u: any) => u.email === email);
-    
-    if (existingUser) {
-      setIsLoading(false);
-      throw new Error('User already exists. Please login instead.');
-    }
-    
-    const newUser = {
-      id: crypto.randomUUID(),
-      name,
+    const { error } = await supabase.auth.signUp({
       email,
       password,
-      avatar: undefined,
-    };
-    
-    storedUsers.push(newUser);
-    localStorage.setItem('hridaymitra_users', JSON.stringify(storedUsers));
-    
-    const userData: User = {
-      id: newUser.id,
-      name: newUser.name,
-      email: newUser.email,
-    };
-    
-    setUser(userData);
-    localStorage.setItem('hridaymitra_user', JSON.stringify(userData));
-    setIsLoading(false);
+      options: {
+        data: {
+          full_name: name,
+        },
+      },
+    });
+
+    if (error) {
+      setIsLoading(false);
+      throw new Error(error.message);
+    }
   };
 
   const loginWithGoogle = async () => {
     setIsLoading(true);
-    // Simulate Google OAuth
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const userData: User = {
-      id: crypto.randomUUID(),
-      name: 'Google User',
-      email: 'user@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-    };
-    
-    setUser(userData);
-    localStorage.setItem('hridaymitra_user', JSON.stringify(userData));
-    setIsLoading(false);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    });
+
+    if (error) {
+      setIsLoading(false);
+      throw new Error(error.message);
+    }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
-    localStorage.removeItem('hridaymitra_user');
   };
 
-  const updateAvatar = (avatarUrl: string) => {
+  const updateAvatar = async (avatarUrl: string) => {
     if (user) {
-      const updatedUser = { ...user, avatar: avatarUrl };
-      setUser(updatedUser);
-      localStorage.setItem('hridaymitra_user', JSON.stringify(updatedUser));
-      
-      // Update in users list too
-      const storedUsers = JSON.parse(localStorage.getItem('hridaymitra_users') || '[]');
-      const updatedUsers = storedUsers.map((u: any) => 
-        u.id === user.id ? { ...u, avatar: avatarUrl } : u
-      );
-      localStorage.setItem('hridaymitra_users', JSON.stringify(updatedUsers));
+      const { error } = await supabase
+        .from('profiles')
+        .update({ avatar_url: avatarUrl })
+        .eq('user_id', user.id);
+
+      if (!error) {
+        setUser({ ...user, avatar: avatarUrl });
+      }
     }
   };
 

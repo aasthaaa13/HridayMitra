@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { TrendingUp, Heart, Activity, Droplet, Scale } from 'lucide-react';
+import { TrendingUp, Heart, Activity, Droplet, Scale, AlertCircle } from 'lucide-react';
 import { useHealthData } from '@/contexts/HealthDataContext';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+
+const MIN_DATA_POINTS = 2;
 
 const tabs = [
   { id: 'heart', label: 'Heart Rate', icon: Heart, color: 'hsl(var(--heart-red))' },
@@ -12,6 +16,7 @@ const tabs = [
 
 export default function Tracker() {
   const [activeTab, setActiveTab] = useState('heart');
+  const navigate = useNavigate();
   const { getRecentHeartRates, getRecentBloodPressure, getRecentBloodSugar, getRecentWeight } = useHealthData();
 
   const getData = () => {
@@ -25,6 +30,22 @@ export default function Tracker() {
   };
 
   const data = getData();
+  const hasEnoughData = data.length >= MIN_DATA_POINTS;
+
+  const getEmptyStateMessage = () => {
+    switch (activeTab) {
+      case 'heart':
+        return { action: 'Measure your heart rate', path: '/dashboard/heart-rate' };
+      case 'bp':
+      case 'sugar':
+      case 'weight':
+        return { action: 'Complete a health assessment', path: '/dashboard/assessment' };
+      default:
+        return { action: 'Add health data', path: '/dashboard/assessment' };
+    }
+  };
+
+  const emptyState = getEmptyStateMessage();
 
   return (
     <div className="space-y-6">
@@ -50,9 +71,14 @@ export default function Tracker() {
       </div>
 
       <div className="glass-card p-6">
-        <h2 className="text-lg font-heading font-semibold mb-4">Last 7 Days</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-heading font-semibold">Last 7 Days</h2>
+          <span className="text-xs text-muted-foreground">
+            {data.length} measurement{data.length !== 1 ? 's' : ''} recorded
+          </span>
+        </div>
         <div className="h-72">
-          {data.length > 0 ? (
+          {hasEnoughData ? (
             <ResponsiveContainer width="100%" height="100%">
               {activeTab === 'bp' ? (
                 <BarChart data={data}>
@@ -72,7 +98,24 @@ export default function Tracker() {
               )}
             </ResponsiveContainer>
           ) : (
-            <div className="h-full flex items-center justify-center text-muted-foreground">No data yet</div>
+            <div className="h-full flex items-center justify-center text-muted-foreground">
+              <div className="text-center">
+                <AlertCircle className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                <p className="mb-1">
+                  {data.length === 0 
+                    ? 'No data yet' 
+                    : `${data.length} measurement recorded. Need at least ${MIN_DATA_POINTS} to show trends.`
+                  }
+                </p>
+                <Button 
+                  variant="link" 
+                  className="mt-2"
+                  onClick={() => navigate(emptyState.path)}
+                >
+                  {emptyState.action}
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </div>

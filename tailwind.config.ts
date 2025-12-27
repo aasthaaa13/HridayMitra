@@ -78,6 +78,7 @@ export default {
           blue: "hsl(var(--calm-blue))",
           soft: "hsl(var(--soft-blue))",
           medical: "hsl(var(--medical-blue))",
+          teal: "hsl(var(--health-teal))",
         },
       },
       borderRadius: {
@@ -95,6 +96,9 @@ export default {
         'xl': 'var(--shadow-xl)',
         'glow': 'var(--shadow-glow)',
         'card': 'var(--shadow-card)',
+        'glow-green': 'var(--shadow-glow-green)',
+        'glow-warning': 'var(--shadow-glow-warning)',
+        'glow-red': 'var(--shadow-glow-red)',
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
@@ -124,8 +128,49 @@ export default {
           to: { opacity: "1", transform: "scale(1)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--primary) / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.5)" },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.6" },
+        },
+        "ecg-scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "status-fade": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.7" },
+        },
+        "sync-dot-1": {
+          "0%, 80%, 100%": { opacity: "0.3" },
+          "40%": { opacity: "1" },
+        },
+        "sync-dot-2": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "1" },
+        },
+        "sync-dot-3": {
+          "0%, 20%, 100%": { opacity: "0.3" },
+          "60%": { opacity: "1" },
+        },
+        "breathe": {
+          "0%, 100%": { transform: "scale(1)", opacity: "1" },
+          "50%": { transform: "scale(1.02)", opacity: "0.95" },
+        },
+        "float-particle": {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "25%": { transform: "translateY(-15px) rotate(5deg)" },
+          "50%": { transform: "translateY(-5px) rotate(-5deg)" },
+          "75%": { transform: "translateY(-20px) rotate(3deg)" },
+        },
+        "pulse-ring": {
+          "0%": { transform: "scale(1)", opacity: "0.8" },
+          "100%": { transform: "scale(1.5)", opacity: "0" },
+        },
+        "heartbeat": {
+          "0%, 100%": { transform: "scale(1)" },
+          "15%": { transform: "scale(1.2)" },
+          "30%": { transform: "scale(1)" },
+          "45%": { transform: "scale(1.1)" },
+          "60%": { transform: "scale(1)" },
         },
       },
       animation: {
@@ -135,6 +180,15 @@ export default {
         "slide-in-right": "slide-in-right 0.5s ease-out forwards",
         "scale-in": "scale-in 0.3s ease-out forwards",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "ecg-scroll": "ecg-scroll 8s linear infinite",
+        "status-fade": "status-fade 4s ease-in-out infinite",
+        "sync-dot-1": "sync-dot-1 1.5s ease-in-out infinite",
+        "sync-dot-2": "sync-dot-2 1.5s ease-in-out infinite",
+        "sync-dot-3": "sync-dot-3 1.5s ease-in-out infinite",
+        "breathe": "breathe 4s ease-in-out infinite",
+        "float-particle": "float-particle 15s ease-in-out infinite",
+        "pulse-ring": "pulse-ring 1.5s ease-out infinite",
+        "heartbeat": "heartbeat 1.2s ease-in-out infinite",
       },
     },
   },

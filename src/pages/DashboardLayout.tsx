@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { AIAssistant } from '@/components/dashboard/AIAssistant';
+import { HealthParticles } from '@/components/dashboard/HealthParticles';
 
 const menuItems = [
   { icon: Activity, label: 'Dashboard', path: '/dashboard' },
@@ -83,7 +84,9 @@ export default function DashboardLayout() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex relative">
+      {/* Ambient Health Particles */}
+      <HealthParticles />
       {/* Mobile Overlay */}
       {mobileMenuOpen && (
         <div 
