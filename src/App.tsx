@@ -13,6 +13,8 @@ import DashboardHome from "./pages/dashboard/DashboardHome";
 import HealthAssessment from "./pages/dashboard/HealthAssessment";
 import HeartRateMeasure from "./pages/dashboard/HeartRateMeasure";
 import Tracker from "./pages/dashboard/Tracker";
+import Articles from "./pages/dashboard/Articles";
+import SymptomsTracker from "./pages/dashboard/SymptomsTracker";
 import FindDoctors from "./pages/dashboard/FindDoctors";
 import Settings from "./pages/dashboard/Settings";
 import NotFound from "./pages/NotFound";
@@ -36,8 +38,8 @@ const App = () => (
                   <Route path="assessment" element={<HealthAssessment />} />
                   <Route path="heart-rate" element={<HeartRateMeasure />} />
                   <Route path="tracker" element={<Tracker />} />
-                  <Route path="articles" element={<DashboardHome />} />
-                  <Route path="symptoms" element={<DashboardHome />} />
+                  <Route path="articles" element={<Articles />} />
+                  <Route path="symptoms" element={<SymptomsTracker />} />
                   <Route path="find-doctors" element={<FindDoctors />} />
                   <Route path="settings" element={<Settings />} />
                 </Route>

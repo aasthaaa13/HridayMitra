@@ -104,7 +104,7 @@ export default function DashboardLayout() {
         {/* Logo */}
         <div className="p-4 border-b border-border flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Heart className="h-8 w-8 text-heart-red heartbeat flex-shrink-0" fill="currentColor" />
+            <img src="/app-logo.png" alt="HridayMitra" className="h-10 w-10 flex-shrink-0" />
             {sidebarOpen && (
               <span className="text-xl font-heading font-bold bg-gradient-hero bg-clip-text text-transparent">
                 HridayMitra
@@ -216,27 +216,35 @@ export default function DashboardLayout() {
               {/* Notifications */}
               <div className="relative">
                 <button
-                  className="p-2 text-muted-foreground hover:text-foreground relative"
+                  className="p-2 text-muted-foreground hover:text-foreground relative rounded-lg hover:bg-muted transition-colors"
                   onClick={() => setShowNotifications(!showNotifications)}
                 >
-                  <Bell className="h-6 w-6" />
+                  <Bell className="h-5 w-5" />
                   {notifications.filter(n => !n.read).length > 0 && (
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-heart-red rounded-full" />
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-heart-red rounded-full" />
                   )}
                 </button>
                 
                 {showNotifications && (
-                  <div className="absolute right-0 top-full mt-2 w-80 glass-card p-4 animate-fade-in">
-                    <h3 className="font-semibold mb-3">Notifications</h3>
-                    {notifications.map((notif) => (
-                      <div 
-                        key={notif.id}
-                        className={`p-3 rounded-lg mb-2 ${notif.read ? 'bg-muted/50' : 'bg-primary/10'}`}
-                      >
-                        <p className="text-sm">{notif.message}</p>
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setShowNotifications(false)} />
+                    <div className="absolute right-0 top-full mt-2 w-80 glass-card p-4 animate-fade-in z-50">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-semibold">Notifications</h3>
+                        <button onClick={() => setShowNotifications(false)} className="text-muted-foreground hover:text-foreground">
+                          <X className="h-4 w-4" />
+                        </button>
                       </div>
-                    ))}
-                  </div>
+                      {notifications.map((notif) => (
+                        <div 
+                          key={notif.id}
+                          className={`p-3 rounded-lg mb-2 ${notif.read ? 'bg-muted/50' : 'bg-primary/10'}`}
+                        >
+                          <p className="text-sm">{notif.message}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
 

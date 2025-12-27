@@ -37,7 +37,7 @@ const HealthDataContext = createContext<HealthDataContextType | undefined>(undef
 export function HealthDataProvider({ children }: { children: ReactNode }) {
   const [healthRecords, setHealthRecords] = useState<HealthRecord[]>(() => {
     const stored = localStorage.getItem('hridaymitra_health_records');
-    return stored ? JSON.parse(stored) : generateSampleData();
+    return stored ? JSON.parse(stored) : [];
   });
 
   const [symptoms, setSymptoms] = useState<Symptom[]>(() => {
