@@ -61,9 +61,6 @@ Built with a **clean, animated, and professional UI**, HridayMitra is suitable f
   - Google Analytics (user interaction insights)
   - Firebase (future scope – auth & storage)
 
-### Deployment
-- Vercel
-
 ## 🚀 Deployment
 
 The project is deployed on **Vercel**.
