@@ -1,9 +1,4 @@
 # ❤️ 𝐇𝐫𝐢𝐝𝐚𝐲𝐌𝐢𝐭𝐫𝐚 – AI-Powered Heartcare Assistant
-<p align="center">
-  <img
-    src="https://github.com/aasthaaa13/aasthaaa13/blob/main/Screenshot%202025-07-24%20042455.png" alt="Banner" />
-</p>
-
 HridayMitra is a **modern, AI-driven heart health monitoring and assessment web application** designed to help users understand, track, and improve their cardiovascular health. It combines **data visualization, symptom tracking, risk assessment, and interactive AI assistance** to provide an intuitive and informative experience.
 
 Built with a **clean, animated, and professional UI**, HridayMitra is suitable for **hackathons, academic projects, internships, and health-tech portfolios**.
