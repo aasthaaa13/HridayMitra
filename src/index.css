@@ -185,6 +185,10 @@
   .ecg-line {
     animation: ecgDraw 2s linear infinite;
   }
+
+  .ecg-mini-line {
+    stroke-dasharray: 200;
+  }
 }
 
 @layer utilities {
