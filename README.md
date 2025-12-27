@@ -1,24 +1,82 @@
-# Welcome to your Lovable project
+# ❤️ 𝐇𝐫𝐢𝐝𝐚𝐲𝐌𝐢𝐭𝐫𝐚 – AI-Powered Heartcare Assistant
 
-## Project info
+HridayMitra is a **modern, AI-driven heart health monitoring and assessment web application** designed to help users understand, track, and improve their cardiovascular health. It combines **data visualization, symptom tracking, risk assessment, and interactive AI assistance** to provide an intuitive and informative experience.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Built with a **clean, animated, and professional UI**, HridayMitra is suitable for **hackathons, academic projects, internships, and health-tech portfolios**.
+
+## 🌟 Key Features
+
+### 🫀 Heart Health Assessment
+- Intelligent heart risk assessment based on user inputs  
+- Covers conditions such as:
+  - Angina  
+  - Arrhythmia  
+  - Hypertension  
+  - Coronary Artery Disease (CAD)  
+- Generates **risk levels** (Low / Moderate / High)
+
+### 📊 Health History & Analytics
+- Heart rate trends generated **only after analyzing past history**
+- No fake or auto-generated data
+- Visual insights using charts and graphs
+
+### 🤖 Cura – AI Health Assistant
+- Interactive chatbot-style AI assistant
+- Opens & closes correctly on click
+- Provides:
+  - Health tips
+  - Symptom explanations
+  - Lifestyle suggestions
+
+### 📝 Symptoms Tracker
+- Users can log daily symptoms (chest pain, fatigue, breathlessness, etc.)
+- Weekly and monthly **bar graph analysis**
+- AI-based suggestions generated from symptom patterns
+
+### 📚 Recommended Articles 
+- professionally written health articles
+- Includes:
+  - Realistic medical content
+  - Images & visuals
+  - Modern card-based layout
+- Improves heart health awareness
+
+### 🔔 Smart Notifications
+- Working notification icon
+- Alerts for abnormal patterns & reminders
+
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React
+- Vite
+- Tailwind CSS
+- React Icons
+- Chart libraries (for graphs & analytics)
+
+### Backend / Cloud (Planned & Integrations)
+- Google Cloud Platform (GCP)
+  - Google Maps API (nearby hospitals & emergency support)
+  - Google Analytics (user interaction insights)
+  - Firebase (future scope – auth & storage)
+
+### Deployment
+- Vercel
+
+## 🚀 Deployment
+
+The project is deployed on **Vercel**.
+
+**Live Demo:** https://hriday-uday.vercel.app/
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+If you want to work locally using your own IDE, you can clone this repo.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The only requirement is having Node.js & npm installed
 
 Follow these steps:
 
@@ -60,14 +118,22 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## 📌 Future Enhancements
+- **Wearable Device Fusion** - Integrate smartwatches and fitness bands for continuous, passive heart monitoring.
+- **Emergency Risk Trigger System** - Auto-detect critical patterns and trigger SOS alerts to emergency contacts and hospitals.
+- **AI-Generated Health Reports** - Downloadable, doctor-ready reports summarizing trends, risks and recommendations.
+- **Federated Learning Model** - Improve AI accuracy without centralizing user data, preserving privacy.
+- **Personalized Preventive Roadmaps** - Daily and weekly heart-care plans tailored to user behaviour and risk profile.
+- **Voice-Based Health Logging** - Log symptoms and vitals using voice commands for accessibility.
+- **Clinical Decision Support Mode** - Special interface for doctors with deeper analytics and risk explanations.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 🧠 Future Enhancements (AI-Centric)
+- **Explainable AI Dashboard** - Show **why** a risk score changed, not just the score.
+- **Behaviour-Risk Correlation Engine** - Analyse how sleep, stress and habits influence heart health.
+- **Population-Level Insights** - Anonymous health trend insights for public health research.
 
-## Can I connect a custom domain to my Lovable project?
+## 🫱🏻‍🫲🏻 Team
+Built with ❤️ by **Team MavericX**
+ 
 
-Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
