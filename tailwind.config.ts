@@ -172,56 +172,6 @@ export default {
           "45%": { transform: "scale(1.1)" },
           "60%": { transform: "scale(1)" },
         },
-        "ecg-flow": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        "live-pulse": {
-          "0%, 100%": { opacity: "1", transform: "scale(1)" },
-          "50%": { opacity: "0.8", transform: "scale(1.1)" },
-        },
-        "live-ping": {
-          "0%": { transform: "scale(1)", opacity: "0.8" },
-          "75%, 100%": { transform: "scale(2.5)", opacity: "0" },
-        },
-        "orbit-slow": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
-        },
-        "orbit-reverse": {
-          "0%": { transform: "rotate(360deg)" },
-          "100%": { transform: "rotate(0deg)" },
-        },
-        "float-card": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-8px)" },
-        },
-        "pulse-ring-slow": {
-          "0%": { transform: "scale(1)", opacity: "0.6" },
-          "50%": { transform: "scale(1.15)", opacity: "0.3" },
-          "100%": { transform: "scale(1)", opacity: "0.6" },
-        },
-        "pulse-ring-outer": {
-          "0%": { transform: "scale(1)", opacity: "0.3" },
-          "50%": { transform: "scale(1.05)", opacity: "0.15" },
-          "100%": { transform: "scale(1)", opacity: "0.3" },
-        },
-        "ecg-mini": {
-          "0%": { strokeDashoffset: "200" },
-          "100%": { strokeDashoffset: "0" },
-        },
-        "blink": {
-          "0%, 50%": { opacity: "1" },
-          "51%, 100%": { opacity: "0" },
-        },
-        "scroll-indicator": {
-          "0%, 100%": { transform: "translateY(0)", opacity: "1" },
-          "50%": { transform: "translateY(12px)", opacity: "0.3" },
-        },
-        "bounce-subtle": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(4px)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -239,18 +189,6 @@ export default {
         "float-particle": "float-particle 15s ease-in-out infinite",
         "pulse-ring": "pulse-ring 1.5s ease-out infinite",
         "heartbeat": "heartbeat 1.2s ease-in-out infinite",
-        "ecg-flow": "ecg-flow 4s linear infinite",
-        "live-pulse": "live-pulse 2s ease-in-out infinite",
-        "live-ping": "live-ping 1.5s ease-out infinite",
-        "orbit-slow": "orbit-slow 30s linear infinite",
-        "orbit-reverse": "orbit-reverse 25s linear infinite",
-        "float-card": "float-card 4s ease-in-out infinite",
-        "pulse-ring-slow": "pulse-ring-slow 3s ease-in-out infinite",
-        "pulse-ring-outer": "pulse-ring-outer 4s ease-in-out infinite",
-        "ecg-mini": "ecg-mini 1.5s linear infinite",
-        "blink": "blink 1s step-end infinite",
-        "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
-        "bounce-subtle": "bounce-subtle 2s ease-in-out infinite",
       },
     },
   },
